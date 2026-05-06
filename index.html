@@ -43,54 +43,49 @@
     </div>
 
     <script>
-        let authToken = "";
-        let chatHistory = []; // Stores the session history
+    let authToken = localStorage.getItem('sahad_token');
+    if(authToken) document.getElementById('login-overlay').style.display = 'none';
 
-        async function doLogin() {
-            const password = document.getElementById('pass-field').value;
-            const res = await fetch('/login', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ password })
-            });
-            if(res.ok) {
-                const data = await res.json();
-                authToken = data.token;
-                document.getElementById('login-overlay').style.display = 'none';
-            } else { alert("ACCESS DENIED"); }
-        }
+    async function doLogin() {
+        const password = document.getElementById('pass-field').value;
+        const res = await fetch('/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ password })
+        });
+        const data = await res.json();
+        if(data.token) {
+            authToken = data.token;
+            localStorage.setItem('sahad_token', authToken);
+            document.getElementById('login-overlay').style.display = 'none';
+        } else { alert("ACCESS DENIED"); }
+    }
 
-        async function send() {
-            const input = document.getElementById('user-msg');
-            const box = document.getElementById('chat-box');
-            const msg = input.value;
-            if(!msg) return;
+    async function send() {
+        const input = document.getElementById('user-msg');
+        const box = document.getElementById('chat-box');
+        const msg = input.value;
+        if(!msg) return;
 
-            // User UI
-            box.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[80%] shadow-lg">${msg}</div></div>`;
-            input.value = '';
-            box.scrollTop = box.scrollHeight;
+        // Add user message to UI
+        box.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 p-3 rounded-xl rounded-tr-none max-w-[80%]">${msg}</div></div>`;
+        input.value = '';
+        box.scrollTop = box.scrollHeight;
 
+        try {
             const res = await fetch('/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': authToken },
-                body: JSON.stringify({ message: msg, history: chatHistory })
+                body: JSON.stringify({ message: msg })
             });
             const data = await res.json();
 
-            // AI UI
-            box.innerHTML += `<div class="flex justify-start"><div class="bg-[#1e293b] border border-slate-700 p-4 rounded-2xl rounded-tl-none max-w-[90%] text-sm leading-relaxed whitespace-pre-wrap">${data.text}</div></div>`;
-            
-            // Save to history for context
-            chatHistory.push({ role: "user", parts: [{ text: msg }] });
-            chatHistory.push({ role: "model", parts: [{ text: data.text }] });
+            if(data.error) throw new Error(data.error);
 
-            box.scrollTop = box.scrollHeight;
+            box.innerHTML += `<div class="flex justify-start"><div class="bg-slate-800 border border-slate-700 p-4 rounded-xl rounded-tl-none max-w-[90%] text-sm whitespace-pre-wrap">${data.text}</div></div>`;
+        } catch (err) {
+            box.innerHTML += `<div class="flex justify-center"><div class="bg-red-900/30 text-red-400 border border-red-500/50 p-2 rounded-lg text-xs font-mono text-center w-full">CRITICAL ERROR: ${err.message}</div></div>`;
         }
-
-        // Allow "Enter" key to send
-        document.getElementById('user-msg').addEventListener("keyup", (e) => { if(e.key === "Enter") send(); });
-    </script>
-</body>
-</html>
-
+        box.scrollTop = box.scrollHeight;
+    }
+</script>
