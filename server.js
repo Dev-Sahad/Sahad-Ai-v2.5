@@ -1,0 +1,38 @@
+const express = require('express');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const dotenv = require('dotenv');
+const path = require('path');
+
+dotenv.config();
+const app = express();
+app.use(express.json());
+
+// Serve the index.html file from the current folder
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Setup Gemini
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const model = genAI.getGenerativeModel({ 
+    model: "gemini-2.5-flash",
+    systemInstruction: "You are an expert coder. Explain every single line of code you write in simple steps."
+});
+
+// Chat Endpoint
+app.post('/chat', async (req, res) => {
+    try {
+        const { message } = req.body;
+        const result = await model.generateContent(message);
+        const response = await result.response;
+        res.json({ text: response.text() });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ text: "Error: " + error.message });
+    }
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running! Go to http://localhost:${PORT}`);
+});

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My AI Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f172a] text-white font-sans min-h-screen flex flex-col">
+
+    <div class="p-4 bg-[#1e293b] shadow-lg">
+        <h1 class="text-xl font-bold text-blue-400">AI Coding Assistant</h1>
+    </div>
+
+    <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+        <div class="bg-blue-900/30 p-3 rounded-lg border border-blue-500/30 text-sm">
+            Hello! Ask me to write any code, and I will explain it line-by-line.
+        </div>
+    </div>
+
+    <div class="p-4 bg-[#1e293b]">
+        <div class="flex gap-2">
+            <input id="user-input" type="text" placeholder="Type your request..." 
+                class="flex-1 bg-[#0f172a] border border-gray-600 rounded-lg px-4 py-2 outline-none focus:border-blue-500">
+            <button onclick="sendMessage()" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-bold transition">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const container = document.getElementById('chat-container');
+            const message = input.value;
+
+            if (!message) return;
+
+            // Show User Message
+            container.innerHTML += `<div class="text-right"><span class="bg-gray-700 p-2 rounded-lg inline-block text-sm">${message}</span></div>`;
+            input.value = '';
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await response.json();
+
+                // Show AI Message
+                container.innerHTML += `<div class="text-left"><div class="bg-blue-900/20 p-3 rounded-lg border border-blue-500/20 text-sm whitespace-pre-wrap">${data.text}</div></div>`;
+                
+                // Scroll to bottom
+                container.scrollTop = container.scrollHeight;
+            } catch (err) {
+                alert("Could not connect to server. Is Termux running?");
+            }
+        }
+    </script>
+</body>
+</html>
