@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAHAD_AI_v2.5 // CORE</title>
+    <title>SAHAD_AI_v2.5 // ARCHITECT_CORE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
@@ -12,7 +12,6 @@
         .cyber-glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
         .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); }
         
-        /* Custom scrollbar for that terminal look */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
@@ -40,93 +39,99 @@
             <div class="h-2 w-2 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_#3b82f6]"></div>
             <span class="text-blue-400 font-bold tracking-tighter text-lg italic">SAHAD_AI_2.5</span>
         </div>
-        <div class="flex items-center gap-4">
-            <span class="hidden sm:inline text-[10px] text-slate-600 font-mono">STATUS: ONLINE</span>
-            <button onclick="terminateSession()" class="text-[10px] text-red-500/50 hover:text-red-500 transition-colors uppercase border border-red-500/20 px-2 py-1 rounded">Logout</button>
-        </div>
+        <button onclick="terminateSession()" class="text-[10px] text-red-500/50 hover:text-red-500 transition-colors uppercase border border-red-500/20 px-2 py-1 rounded">Logout</button>
     </nav>
 
     <main id="chat-stream" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 max-w-5xl mx-auto w-full">
-        <div class="text-center text-[10px] text-slate-700 uppercase tracking-[0.2em] py-10">--- Encrypted Connection Established ---</div>
+        <div class="text-center text-[10px] text-slate-700 uppercase tracking-[0.2em] py-10">--- Secure Protocol Active ---</div>
     </main>
 
     <footer class="p-4 glass border-t border-slate-800">
-        <div class="max-w-4xl mx-auto flex gap-3">
-            <input id="user-input" type="text" placeholder="Input command..." 
-                class="flex-1 bg-black/40 border border-slate-800 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all text-sm">
-            <button onclick="send()" class="bg-blue-600 p-3 rounded-xl cyber-glow hover:bg-blue-500 active:scale-90 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-            </button>
+        <div class="max-w-4xl mx-auto flex flex-col gap-3">
+            <div id="image-preview" class="hidden flex items-center gap-3 p-2 bg-blue-500/5 border border-dashed border-blue-500/30 rounded-xl">
+                </div>
+
+            <div class="flex gap-3">
+                <label class="bg-slate-800 p-3 rounded-xl hover:bg-slate-700 cursor-pointer transition-all">
+                    <input type="file" id="file-input" class="hidden" accept="image/*" onchange="previewFile()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </label>
+                <input id="user-input" type="text" placeholder="Command AI or upload images..." 
+                    class="flex-1 bg-black/40 border border-slate-800 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all text-sm">
+                <button onclick="send()" class="bg-blue-600 p-3 rounded-xl hover:bg-blue-500 active:scale-90 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
         </div>
-        <p class="text-[8px] text-center text-slate-700 mt-2 uppercase tracking-widest">Dev-Sahad Architecture // 2026</p>
     </footer>
 
     <script>
         const chatStream = document.getElementById('chat-stream');
         const userInput = document.getElementById('user-input');
         const authOverlay = document.getElementById('auth-overlay');
+        const fileInput = document.getElementById('file-input');
+        const previewBox = document.getElementById('image-preview');
 
-        // Check for existing session
         let token = localStorage.getItem('sahad_ai_token');
-        if (token) {
-            authOverlay.classList.add('opacity-0', 'pointer-events-none');
-        }
+        let currentImageBase64 = null;
+        let currentMimeType = null;
+
+        if (token) authOverlay.classList.add('opacity-0', 'pointer-events-none');
 
         async function handleLogin() {
             const password = document.getElementById('key-field').value;
-            try {
-                const res = await fetch('/login', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ password })
-                });
-                const data = await res.json();
-                if (data.token) {
-                    token = data.token;
-                    localStorage.setItem('sahad_ai_token', token);
-                    authOverlay.classList.add('opacity-0', 'pointer-events-none');
-                } else {
-                    alert("ACCESS_DENIED: UNAUTHORIZED_KEY");
-                }
-            } catch (e) {
-                alert("SYSTEM_ERROR: CONNECTION_FAILED");
-            }
+            const res = await fetch('/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ password })
+            });
+            const data = await res.json();
+            if (data.token) {
+                token = data.token;
+                localStorage.setItem('sahad_ai_token', token);
+                authOverlay.classList.add('opacity-0', 'pointer-events-none');
+            } else { alert("INVALID_KEY"); }
+        }
+
+        function previewFile() {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                currentImageBase64 = reader.result.split(',')[1];
+                currentMimeType = file.type;
+                previewBox.innerHTML = `<img src="${reader.result}" class="h-12 w-12 rounded border border-blue-500"><span class="text-[10px] text-blue-400">IMAGE_READY</span>`;
+                previewBox.classList.remove('hidden');
+            };
+            if (file) reader.readAsDataURL(file);
         }
 
         async function send() {
             const message = userInput.value.trim();
-            if (!message) return;
+            if (!message && !currentImageBase64) return;
 
-            // Render User Message
             renderMessage('user', message);
+            const payload = { message, image: currentImageBase64, mimeType: currentMimeType };
+            
+            // Clear inputs
             userInput.value = '';
+            currentImageBase64 = null;
+            previewBox.classList.add('hidden');
             autoScroll();
 
             try {
                 const res = await fetch('/chat', {
                     method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json', 
-                        'Authorization': token 
-                    },
-                    body: JSON.stringify({ message })
+                    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+                    body: JSON.stringify(payload)
                 });
-
                 const data = await res.json();
-
-                if (data.error === "SESSION_EXPIRED") {
-                    terminateSession();
-                    return;
-                }
-
-                if (data.error) throw new Error(data.error);
-
+                if (data.error === "SESSION_EXPIRED") terminateSession();
                 renderMessage('ai', data.text);
-            } catch (err) {
-                renderMessage('system', `CRITICAL_ERROR: ${err.message}`);
-            }
+            } catch (err) { renderMessage('system', "STREAMS_ERROR"); }
             autoScroll();
         }
 
@@ -134,25 +139,31 @@
             const div = document.createElement('div');
             div.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`;
             
-            let contentClass = "";
-            if (type === 'user') contentClass = "bg-blue-600/10 border border-blue-500/40 text-blue-100 p-3 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-lg shadow-blue-900/10";
-            else if (type === 'ai') contentClass = "bg-slate-900/60 border border-slate-800 p-4 rounded-2xl rounded-tl-none max-w-[95%] text-sm leading-relaxed whitespace-pre-wrap text-slate-200 shadow-xl";
-            else contentClass = "bg-red-900/20 border border-red-500/30 p-2 rounded text-[10px] font-mono text-red-400 w-full text-center uppercase tracking-tighter";
+            let htmlContent = text;
+            if (type === 'ai') {
+                // Feature 1: Regex to wrap code blocks with a Copy Button
+                htmlContent = text.replace(/```([\s\S]*?)```/g, (match, code) => {
+                    return `<div class="relative mt-2 bg-black/60 rounded-lg p-4 font-mono text-xs border border-slate-700">
+                        <button onclick="copyCode(this)" class="absolute top-2 right-2 text-[10px] text-slate-500 hover:text-white uppercase px-2 py-1 bg-slate-800 rounded">Copy</button>
+                        <pre class="overflow-x-auto"><code>${code.trim()}</code></pre>
+                    </div>`;
+                });
+            }
 
-            div.innerHTML = `<div class="${contentClass}">${text}</div>`;
+            const style = type === 'user' ? 'bg-blue-600/10 border border-blue-500/30 text-blue-100' : 'bg-slate-900/60 border border-slate-800 text-slate-200';
+            div.innerHTML = `<div class="p-4 rounded-2xl max-w-[90%] text-sm leading-relaxed ${style}">${htmlContent}</div>`;
             chatStream.appendChild(div);
         }
 
-        function autoScroll() {
-            chatStream.scrollTo({ top: chatStream.scrollHeight, behavior: 'smooth' });
+        function copyCode(btn) {
+            const code = btn.nextElementSibling.innerText;
+            navigator.clipboard.writeText(code);
+            btn.innerText = "COPIED";
+            setTimeout(() => btn.innerText = "COPY", 2000);
         }
 
-        function terminateSession() {
-            localStorage.removeItem('sahad_ai_token');
-            location.reload();
-        }
-
-        // Keyboard support
+        function autoScroll() { chatStream.scrollTo({ top: chatStream.scrollHeight, behavior: 'smooth' }); }
+        function terminateSession() { localStorage.removeItem('sahad_ai_token'); location.reload(); }
         userInput.addEventListener("keypress", (e) => { if(e.key === "Enter") send(); });
     </script>
 </body>
