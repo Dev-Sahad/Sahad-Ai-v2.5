@@ -1,290 +1,159 @@
-# 🌌 SAHAD_AI v2.5 — ARCHITECT CORE
+# 🌌 SAHAD_AI v2.5
 
-<p align="center">
-  <img src="https://i.imgur.com/8Km9tLL.gif" width="100%" alt="AI Cyberpunk Banner">
-</p>
+<div align="center">
 
-<h1 align="center">
-⚡ SAHAD_AI v2.5 ⚡
-</h1>
+# ⚡ SAHAD_AI v2.5
 
-<h3 align="center">
-AI-Powered Full-Stack Development Workspace
-</h3>
+### AI-Powered Full-Stack Development Workspace
 
-<p align="center">
+Modern AI engineering platform powered by Gemini 2.0 Flash with multimodal intelligence, JWT authentication, cloud deployment, and a futuristic developer experience.
 
-![Production Ready](https://img.shields.io/badge/Production-Ready-blueviolet?style=for-the-badge)
-![Deployment](https://img.shields.io/badge/Deployment-Render-000000?style=for-the-badge&logo=render)
-![Gemini](https://img.shields.io/badge/AI-Gemini_2.0_Flash-4285F4?style=for-the-badge&logo=google)
+<br>
+
+![Stars](https://img.shields.io/github/stars/Dev-Sahad/Sahad-Ai-v2.5?style=for-the-badge)
+![Forks](https://img.shields.io/github/forks/Dev-Sahad/Sahad-Ai-v2.5?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/Dev-Sahad/Sahad-Ai-v2.5?style=for-the-badge)
+![License](https://img.shields.io/github/license/Dev-Sahad/Sahad-Ai-v2.5?style=for-the-badge)
+
 ![NodeJS](https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=node.js)
-![TailwindCSS](https://img.shields.io/badge/UI-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Gemini](https://img.shields.io/badge/AI-Gemini_2.0_Flash-4285F4?style=for-the-badge&logo=google)
 ![JWT](https://img.shields.io/badge/Auth-JWT-red?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Production-success?style=for-the-badge)
+![Render](https://img.shields.io/badge/Deployment-Render-000000?style=for-the-badge&logo=render)
 
-</p>
+</div>
 
 ---
 
-# 🧠 Next-Generation AI Workspace
+# 🚀 Overview
 
-<p align="center">
-  <img src="https://i.imgur.com/XM7T6W5.gif" width="100%" alt="AI Interface">
-</p>
-
-> **“Precision in every line. Intelligence in every response.”**
-
-SAHAD_AI is a futuristic AI engineering workspace built for:
-- 👨‍💻 Full-Stack Developers
-- ☁️ Cloud Engineers
-- 🧠 AI Developers
-- 🛡️ Security Engineers
-- ⚡ System Architects
-- 🚀 Modern Software Teams
+SAHAD_AI is a modern AI engineering workspace designed for developers, architects, cloud engineers, and AI enthusiasts.
 
 The platform combines:
-- Real-time AI interaction
-- Multimodal intelligence
-- Enterprise-grade authentication
-- Cyberpunk UI aesthetics
-- Cloud-native deployment
-- Developer productivity tooling
+
+- 🧠 Gemini 2.0 Flash
+- 👁️ Multimodal Vision Analysis
+- 🔐 JWT Authentication
+- ⚡ Real-Time AI Responses
+- ☁️ Cloud Deployment
+- 🎨 Cyberpunk UI
+- 💻 Developer Productivity Tools
 
 ---
 
-# ⚡ LIVE AI SYSTEM PREVIEW
+# 📸 Screenshots
 
-<p align="center">
-  <img src="https://i.imgur.com/2t9l6Bt.gif" width="95%" alt="System Demo">
-</p>
+> Replace the image paths below with actual screenshots from your project.
 
----
+## Login Screen
 
-# 🏗️ FULL STACK ARCHITECTURE
+![Login](docs/screenshots/login.png)
 
-<p align="center">
-  <img src="https://i.imgur.com/5kLde4P.gif" width="100%" alt="Architecture Animation">
-</p>
+## Dashboard
 
-## 🧩 Architecture Layers
+![Dashboard](docs/screenshots/dashboard.png)
 
-| Layer | Technology | Responsibility |
-| :--- | :--- | :--- |
-| 🌐 Frontend | HTML5 / Tailwind CSS / JS | Interactive Workspace |
-| ⚙️ Backend | Node.js / Express | APIs & Routing |
-| 🧠 AI Engine | Gemini 2.0 Flash | AI Processing |
-| 🔐 Security | JWT Authentication | Session Validation |
-| 💾 Storage | Lowdb / JSON | Persistent Storage |
-| ☁️ Infrastructure | Render | Cloud Deployment |
+## AI Workspace
 
----
+![Workspace](docs/screenshots/workspace.png)
 
-# 🔐 SECURITY INFRASTRUCTURE
+## Vision Analysis
 
-<p align="center">
-  <img src="https://i.imgur.com/1ZvVkDc.gif" width="100%" alt="Cyber Security">
-</p>
+![Vision](docs/screenshots/vision.png)
 
-## 🛡️ Authentication System
+## Mobile Experience
 
-The platform uses JWT-based authentication with protected middleware routing.
-
-### Security Features
-
-- 🔐 Stateless Authentication
-- 🧠 Secure JWT Sessions
-- ⚡ Protected API Endpoints
-- 🌍 Environment Isolation
-- ⏳ Token Expiration Logic
-- ☁️ Cloud Security Compatibility
+![Mobile](docs/screenshots/mobile.png)
 
 ---
 
-## 🔑 Environment Variables
+# ✨ Features
 
-```env
-API_KEY=your_google_gemini_api_key
-JWT_SECRET=super_secure_random_string
-MY_PASSWORD=your_password
-PORT=3000
+## 🤖 AI Features
+
+- Gemini 2.0 Flash Integration
+- Context-Aware Conversations
+- Code Generation
+- Debugging Assistance
+- Architecture Suggestions
+- Vision Understanding
+- Screenshot Analysis
+
+## 🔐 Security Features
+
+- JWT Authentication
+- Protected Routes
+- Secure Middleware
+- Environment Isolation
+- Token Expiration
+- API Protection
+
+## 💻 Developer Experience
+
+- Responsive Interface
+- Copy-to-Clipboard Actions
+- Syntax Highlighting
+- Mobile Optimized
+- Modern UI Components
+
+---
+
+# 🏗️ Architecture
+
+```mermaid
+flowchart TD
+
+A[Frontend]
+--> B[Express API]
+
+B --> C[Gemini AI Engine]
+B --> D[Authentication]
+
+D --> E[JWT]
+
+B --> F[LowDB Storage]
+
+C --> G[AI Responses]
+
+F --> G
 ```
 
 ---
 
-# 👁️ MULTIMODAL AI VISION
+# ⚙️ Tech Stack
 
-<p align="center">
-  <img src="https://i.imgur.com/4M7IWwP.gif" width="100%" alt="AI Vision">
-</p>
-
-The AI engine supports image-based contextual understanding.
-
-## Supported Features
-
-- 📸 Screenshot Debugging
-- 🎨 UI/UX Analysis
-- 📝 Handwritten Notes → Code
-- 💻 Terminal Reading
-- 🧠 Architecture Visualization
-- 📱 Frontend Error Detection
-
----
-
-# 🎨 CYBERPUNK DEVELOPER EXPERIENCE
-
-<p align="center">
-  <img src="https://i.imgur.com/Wi9K6TB.gif" width="100%" alt="Cyberpunk Workspace">
-</p>
-
-## 🌙 UI Features
-
-### ⚡ Cyberpunk Interface
-- Dark neon-inspired workspace
-- Tailwind-powered responsive layouts
-- JetBrains Mono typography
-- Smooth futuristic visuals
-
-### 🚀 Productivity Utilities
-- Floating COPY buttons
-- AI-generated code formatting
-- Clean developer response system
-- Optimized UI responsiveness
-
----
-
-# 🛠️ FULL TECH STACK
-
-<p align="center">
-  <img src="https://i.imgur.com/BVQ8Q6M.gif" width="100%" alt="Tech Stack">
-</p>
-
-## Backend Stack
-
-```bash
-Node.js
-Express.js
-JWT Authentication
-Lowdb
-Google Generative AI SDK
-```
-
----
-
-## Frontend Stack
+## Frontend
 
 ```bash
 HTML5
 Tailwind CSS
 JavaScript
-Responsive Components
 ```
 
----
+## Backend
+
+```bash
+Node.js
+Express.js
+JWT
+LowDB
+Google Generative AI SDK
+```
 
 ## Infrastructure
 
 ```bash
-Render Deployment
-Cloud Hosting
+Render
+GitHub
 Environment Variables
-Production APIs
 ```
 
 ---
 
-# 🚀 DEPLOYMENT PIPELINE
-
-<p align="center">
-  <img src="https://i.imgur.com/3ZQ3Z6Q.gif" width="100%" alt="Deployment">
-</p>
-
-# ☁️ Render Deployment
-
-## 1️⃣ Connect Repository
-
-Connect your GitHub repository to Render Web Service.
-
----
-
-## 2️⃣ Add Environment Variables
-
-```bash
-Render Dashboard → Environment
-```
-
-Add:
-- API_KEY
-- JWT_SECRET
-- MY_PASSWORD
-- PORT
-
----
-
-## 3️⃣ Build Settings
-
-### Build Command
-
-```bash
-npm install
-```
-
-### Start Command
-
-```bash
-node server.js
-```
-
----
-
-## 4️⃣ Auto Deploy
-
-Every GitHub push automatically redeploys the application.
-
----
-
-# 💻 LOCAL DEVELOPMENT
-
-<p align="center">
-  <img src="https://i.imgur.com/5cLDe6A.gif" width="100%" alt="Local Development">
-</p>
-
-## Clone Repository
-
-```bash
-git clone https://github.com/Dev-Sahad/Clone-Gemini-Project.git
-```
-
----
-
-## Install Dependencies
-
-```bash
-npm install
-```
-
----
-
-## Create `.env`
-
-```bash
-touch .env
-```
-
----
-
-## Start Server
-
-```bash
-node server.js
-```
-
----
-
-# 📂 ENTERPRISE PROJECT STRUCTURE
+# 📂 Project Structure
 
 ```bash
 project-root/
-│
+
 ├── public/
 │   ├── index.html
 │   ├── style.css
@@ -313,105 +182,180 @@ project-root/
 
 ---
 
-# 🧠 AI ENGINE CAPABILITIES
+# 🔑 Environment Variables
 
-<p align="center">
-  <img src="https://i.imgur.com/n8OYCzR.gif" width="100%" alt="AI Core">
-</p>
+Create a `.env` file:
 
-## Gemini 2.0 Flash Features
-
-- ⚡ Real-Time AI Responses
-- 🧠 Intelligent Code Generation
-- 🛠️ Full-Stack Debugging
-- 👁️ Vision Analysis
-- 🧩 Architecture Suggestions
-- 💬 Context-Aware Conversations
+```env
+API_KEY=your_google_gemini_api_key
+JWT_SECRET=super_secure_secret
+MY_PASSWORD=your_password
+PORT=3000
+```
 
 ---
 
-# 🔥 RECOMMENDED PACKAGES
+# 📦 Installation
 
-## Core Packages
+Clone the repository:
 
 ```bash
-npm install express dotenv cors jsonwebtoken lowdb
-npm install @google/generative-ai
+git clone https://github.com/Dev-Sahad/Sahad-Ai-v2.5.git
 ```
 
----
-
-## Production Packages
+Enter project directory:
 
 ```bash
-npm install helmet compression morgan
+cd Sahad-Ai-v2.5
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
+
+```bash
+node server.js
 ```
 
 ---
 
-# ⚡ FUTURE ROADMAP
+# ☁️ Render Deployment
 
-<p align="center">
-  <img src="https://i.imgur.com/r4K4F0F.gif" width="100%" alt="Roadmap">
-</p>
+## Build Command
 
-## Upcoming Features
+```bash
+npm install
+```
 
-- 🔥 Multi-user Accounts
-- 🎤 Voice AI Integration
-- 🐳 Docker Deployment
-- ⚡ Redis Caching
-- 🌐 WebSocket Streaming
-- 📂 File Upload Processing
-- 👥 Team Collaboration
+## Start Command
 
----
-
-# 👨‍💻 DEVELOPER
-
-<p align="center">
-  <img src="https://i.imgur.com/qpr5LR2.gif" width="180" alt="Developer GIF">
-</p>
-
-<h2 align="center">
-Muhammad Sahad
-</h2>
-
-<p align="center">
-Senior Full-Stack Software Engineer • AI Developer • System Architect
-</p>
-
-<p align="center">
-📍 UAE & INDIA
-</p>
-
-<p align="center">
-<a href="https://github.com/Dev-Sahad">
-  <img src="https://img.shields.io/badge/GitHub-Dev--Sahad-181717?style=for-the-badge&logo=github">
-</a>
-</p>
-
----
-
-# 📄 LICENSE
-
-```txt
-© 2026 SAHAD_AI Systems
-All Rights Reserved
-Unauthorized distribution prohibited
+```bash
+node server.js
 ```
 
 ---
 
-# 🌌 FINAL STATEMENT
+# 🔌 API Overview
 
-<p align="center">
-  <img src="https://i.imgur.com/e7n8QZB.gif" width="100%" alt="Final Animation">
-</p>
+## Authentication
 
-<h2 align="center">
+```http
+POST /login
+```
 
-“Architecture is not just code.  
-It is the intelligence behind every interaction.”
+Returns:
 
-</h2>
+```json
+{
+  "token": "jwt_token"
+}
+```
+
+---
+
+## AI Chat
+
+```http
+POST /api/chat
+```
+
+Example:
+
+```json
+{
+  "message": "Generate a Node.js API"
+}
+```
+
+---
+
+## Vision Analysis
+
+```http
+POST /api/vision
+```
+
+Upload an image and receive AI-powered analysis.
+
+---
+
+# 🛡 Security
+
+SAHAD_AI follows security best practices:
+
+- JWT Session Authentication
+- Secure Middleware Protection
+- Environment Variable Isolation
+- Request Validation
+- Protected API Routes
+
+---
+
+# 🗺️ Roadmap
+
+## Version 3.0
+
+- [ ] Voice AI
+- [ ] Docker Support
+- [ ] Redis Caching
+- [ ] Multi-User Accounts
+- [ ] WebSocket Streaming
+- [ ] Team Collaboration
+- [ ] File Processing
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+```bash
+fork ➜ create branch ➜ commit ➜ push ➜ pull request
+```
+
+---
+
+# 👨‍💻 Developer
+
+## Muhammad Sahad
+
+Full-Stack Developer • AI Developer • Open Source Builder
+
+GitHub:
+
+https://github.com/Dev-Sahad
+
+---
+
+# ⭐ Support
+
+If you find this project useful:
+
+```text
+⭐ Star the repository
+🍴 Fork the project
+🛠 Contribute improvements
+```
+
+---
+
+# 📄 License
+
+MIT License
+
+Copyright (c) 2026 Muhammad Sahad
+
+---
+
+<div align="center">
+
+## 🌌 SAHAD_AI
+
+"Architecture is not just code.
+It is the intelligence behind every interaction."
+
+</div>
